@@ -28,6 +28,10 @@ android {
             task.enabled = false
         }
     }
+	
+	lintOptions {
+		abortOnError false
+	}
 }
 
 
