@@ -1,8 +1,53 @@
-LOCAL_PATH := $(call my-dir)
+LOCAL_PATH:= $(call my-dir)
+
+# ------------------------------------------------------------------
+# Static library for libjpeg
+# ------------------------------------------------------------------
 
 include $(CLEAR_VARS)
+LOCAL_MODULE := jpeg_static
+LOCAL_MODULE_FILENAME := libjpeg
+LOCAL_SRC_FILES := \
+	jcapimin.c jcapistd.c jccoefct.c jccolor.c jcdctmgr.c jchuff.c \
+	jcinit.c jcmainct.c jcmarker.c jcmaster.c jcomapi.c jcparam.c \
+	jcprepct.c jcsample.c jctrans.c jdapimin.c jdapistd.c \
+	jdatadst.c jdatasrc.c jdcoefct.c jdcolor.c jddctmgr.c jdhuff.c \
+	jdinput.c jdmainct.c jdmarker.c jdmaster.c jdmerge.c \
+	jdpostct.c jdsample.c jdtrans.c jerror.c jfdctflt.c jfdctfst.c \
+	jfdctint.c jidctflt.c jidctfst.c jidctint.c jquant1.c \
+	jquant2.c jutils.c jmemmgr.c jcarith.c jdarith.c jaricom.c
 
-LOCAL_MODULE    := libjpeg
-LOCAL_SRC_FILES := lib/libjpeg.a
+# Use the no backing store memory manager provided by
+# libjpeg. See install.txt
+LOCAL_SRC_FILES += \
+	jmemnobs.c
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/include
+include $(BUILD_STATIC_LIBRARY)
 
-include $(PREBUILT_STATIC_LIBRARY)
+# ------------------------------------------------------------------
+# Shared library for libjpeg
+# ------------------------------------------------------------------
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := jpeg_shared
+LOCAL_MODULE_FILENAME := libjpeg
+LOCAL_SRC_FILES := \
+	jcapimin.c jcapistd.c jccoefct.c jccolor.c jcdctmgr.c jchuff.c \
+	jcinit.c jcmainct.c jcmarker.c jcmaster.c jcomapi.c jcparam.c \
+	jcprepct.c jcsample.c jctrans.c jdapimin.c jdapistd.c \
+	jdatadst.c jdatasrc.c jdcoefct.c jdcolor.c jddctmgr.c jdhuff.c \
+	jdinput.c jdmainct.c jdmarker.c jdmaster.c jdmerge.c \
+	jdpostct.c jdsample.c jdtrans.c jerror.c jfdctflt.c jfdctfst.c \
+	jfdctint.c jidctflt.c jidctfst.c jidctint.c jquant1.c \
+	jquant2.c jutils.c jmemmgr.c jcarith.c jdarith.c jaricom.c
+
+# Use the no backing store memory manager provided by
+# libjpeg. See install.txt
+LOCAL_SRC_FILES += \
+	jmemnobs.c
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/include
+include $(BUILD_SHARED_LIBRARY)
+
+all: jpeg_static jpeg_shared
