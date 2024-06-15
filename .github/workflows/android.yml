@@ -38,4 +38,4 @@ jobs:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.2
       with:
-        path: doom/src/main/libs/
+        path: doom/src/main/
