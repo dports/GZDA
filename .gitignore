@@ -1,3 +1,11 @@
+/build
+/doom/build
+/doom/.externalNativeBuild
+/TouchControls/build
+/doom/src/main/libs
+/doom/src/main/obj
+/doom/src/main/jni/gzdoom_android
+
 # Gradle files
 .gradle/
 build/
